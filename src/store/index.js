@@ -1,5 +1,4 @@
-import { modexRedux } from './reducers'
+import { modexReducers } from './reducers'
 import { createStore } from 'redux'
 
-
-export const store = createStore(modexRedux)
+export const store = createStore(modexReducers)

@@ -1,9 +1,8 @@
 import moment from 'moment'
 
+// Can be easily converted to JSON or w/e format a server requires.
 export const prettyPrintForm = (formR) => {
   let prettyForm = ""
-  console.log("FOOORM:")
-  console.log(formR)
 
   Object.keys(formR).forEach(eachID => {
     const { question, answers } = formR[eachID]
@@ -21,4 +20,13 @@ export const prettyPrintForm = (formR) => {
     prettyForm += '\n\n'
   })
   return prettyForm
+}
+
+export const downloadFile = (name, text) => {
+  const element = document.createElement("a");
+  const file = new Blob([text], { type: 'text/plain' });
+  element.href = URL.createObjectURL(file);
+  element.download = `${name}.txt`;
+  document.body.appendChild(element);
+  element.click();
 }

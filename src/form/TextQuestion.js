@@ -3,7 +3,7 @@ import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateQuestion } from '../store/actions'
 
-const ModexTextQuestion = (props) => {
+const TextQuestion = (props) => {
 
   const data = props.data
   const [value, setValue] = React.useState("")
@@ -28,4 +28,4 @@ const ModexTextQuestion = (props) => {
   </div>)
 }
 
-export default ModexTextQuestion;
+export default TextQuestion;

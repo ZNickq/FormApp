@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { updateQuestion } from '../store/actions'
 import moment from 'moment'
 
-const ModexDateQuestion = (props) => {
+const DateQuestion = (props) => {
 
   const data = props.data
   const [value, setValue] = React.useState(moment())
@@ -43,4 +43,4 @@ const ModexDateQuestion = (props) => {
   </div>)
 }
 
-export default ModexDateQuestion;
+export default DateQuestion;

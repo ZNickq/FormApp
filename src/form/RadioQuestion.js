@@ -1,12 +1,12 @@
-import { FormControl, FormLabel, Select, MenuItem } from '@material-ui/core'
+import { FormControl, FormLabel, RadioGroup, FormControlLabel, Radio } from '@material-ui/core'
 import React, { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateQuestion } from '../store/actions'
 
-const ModexDropdownQuestion = (props) => {
+const RadioQuestion = (props) => {
 
   const data = props.data
-  const [value, setValue] = React.useState("")
+  const [value, setValue] = React.useState(null)
 
   const dispatch = useDispatch()
   const handleChange = useCallback((e) => {
@@ -20,18 +20,13 @@ const ModexDropdownQuestion = (props) => {
   return (<div>
     <FormControl required={data.required} component="fieldset">
       <FormLabel component="legend">{data.question}</FormLabel>
-      <Select
-        labelId="demo-simple-select-helper-label"
-        id="demo-simple-select-helper"
-        value={value}
-        onChange={handleChange}
-      >
+      <RadioGroup aria-label={data.question} name={data.question} value={value} onChange={handleChange}>
         {data.answers.map((each, key) => {
-          return <MenuItem key={key} value={each}> {each} </MenuItem>
+          return <FormControlLabel key={key} value={each} control={<Radio required={data.required} />} label={each} />
         })}
-      </Select>
+      </RadioGroup>
     </FormControl>
   </div >)
 }
 
-export default ModexDropdownQuestion;
+export default RadioQuestion;

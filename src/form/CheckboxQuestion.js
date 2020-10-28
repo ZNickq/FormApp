@@ -8,7 +8,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 
-const ModexCheckboxQuestion = (props) => {
+const CheckboxQuestion = (props) => {
 
   const data = props.data
 
@@ -46,4 +46,4 @@ const ModexCheckboxQuestion = (props) => {
   );
 }
 
-export default ModexCheckboxQuestion;
+export default CheckboxQuestion;
