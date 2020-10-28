@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateQuestion } from '../store/actions'
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -14,10 +16,17 @@ const ModexCheckboxQuestion = (props) => {
 
   const [state, setState] = React.useState(answers.reduce((a, x) => ({ ...a, [x]: false }), {}));
 
+  const dispatch = useDispatch()
+  const handleChange = useCallback((event) => {
+    const newState = { ...state, [event.target.name]: event.target.checked }
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+    const checked = Object.keys(newState).filter(e => newState[e] === true)
+
+    dispatch(updateQuestion(data.id, data.question, checked))
+    setState(newState)
+  }, [data.id, data.question, dispatch, state])
+
+
   const anyChecked = Object.values(state).filter(each => each === true).length === 0
   return (
     <div>

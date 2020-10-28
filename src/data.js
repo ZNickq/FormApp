@@ -13,11 +13,13 @@ export const formData = [
       required: true,
       question: "What did you eat?",
       answers: ["Pizza", "Burger", "Soup"]
-    },
+    }
+  ],
+  [
     {
       id: 3,
       type: "text",
-      required: true,
+      required: false,
       question: "What do you think?"
     },
     {

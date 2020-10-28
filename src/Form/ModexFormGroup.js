@@ -8,8 +8,6 @@ import ModexDropdownQuestion from './ModexDropdownQuestion'
 const ModexFormGroup = (props) => {
 
   const data = props.data
-  console.log("General:")
-  console.log(data)
 
   return (<div>
     {data.map((each, index) => {

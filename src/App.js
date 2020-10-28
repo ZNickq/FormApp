@@ -1,22 +1,46 @@
 import './App.css';
 import { Box, Paper, Typography, Button } from '@material-ui/core'
-import { formData } from './data'
 import ModexFormGroup from './Form/ModexFormGroup'
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { prettyPrintForm } from './utils'
 
 function App() {
 
-  const sections = formData
+  const [sections, setSections] = React.useState([[]])
   const [activeSection, setActiveSection] = React.useState(0)
+  const activeData = sections[activeSection]
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const target = e.target
+  const formRedux = useSelector(state => state.form)
 
-    console.log(Object.keys(target))
-    console.log(target[0])
+  useEffect(() => {
+    fetch('data/quiz.json').then(res => {
+      return res.json()
+    }).then(res => {
+      setSections(res)
+    })
+    return () => {}
+  }, [])
+
+  const handleSubmit = useCallback((e) => {
+    if (activeSection + 1 === sections.length) {
+      const pretty = prettyPrintForm(formRedux)
+      console.log(pretty)
+
+      const element = document.createElement("a");
+      const file = new Blob([pretty], { type: 'text/plain' });
+      element.href = URL.createObjectURL(file);
+      element.download = "form.txt";
+      document.body.appendChild(element);
+      element.click();
+    } else {
+      e.preventDefault()
+
+      setActiveSection(activeSection + 1)
+    }
+
     return false;
-  }
+  }, [formRedux, activeSection, sections.length])
 
   return (
     <div className="App">
@@ -27,10 +51,10 @@ function App() {
               Step {activeSection + 1} / {sections.length}
             </Typography>
             <form onSubmit={handleSubmit}>
-              <ModexFormGroup data={sections[activeSection]}></ModexFormGroup>
+              <ModexFormGroup data={activeData}></ModexFormGroup>
               <Box pt={2}>
                 <Button variant="contained" type="submit">
-                  {activeSection + 1 === sections.count ? "Next" : "Finish"}
+                  {activeSection + 1 === sections.length ? "Finish" : "Next"}
                 </Button>
               </Box>
             </form>
