@@ -6,12 +6,13 @@ const ModexRadioQuestion = (props) => {
   const data = props.data
   const [value, setValue] = React.useState(null)
 
+  console.log("Required: " + data.required)
   return (<div>
-    <FormControl component="fieldset">
+    <FormControl required={data.required} component="fieldset">
       <FormLabel component="legend">{data.question}</FormLabel>
       <RadioGroup aria-label={data.question} name={data.question} value={value} onChange={(e) => { setValue(e.target.value) }}>
         {data.answers.map((each, key) => {
-          return <FormControlLabel key={key} value={each} control={<Radio />} label={each} />
+          return <FormControlLabel key={key} value={each} control={<Radio required={data.required} />} label={each} />
         })}
       </RadioGroup>
     </FormControl>

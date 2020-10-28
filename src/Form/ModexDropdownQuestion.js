@@ -7,7 +7,7 @@ const ModexDropdownQuestion = (props) => {
   const [value, setValue] = React.useState("")
 
   return (<div>
-    <FormControl component="fieldset">
+    <FormControl required={data.required} component="fieldset">
       <FormLabel component="legend">{data.question}</FormLabel>
       <Select
         labelId="demo-simple-select-helper-label"

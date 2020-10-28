@@ -14,6 +14,7 @@ const ModexDateQuestion = (props) => {
     <MuiPickersUtilsProvider utils={MomentUtils}>
       <KeyboardDatePicker
         disableToolbar
+        required={data.required}
         variant="inline"
         format="d/mm/yyyy"
         margin="normal"

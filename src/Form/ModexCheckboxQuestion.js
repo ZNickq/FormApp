@@ -18,15 +18,16 @@ const ModexCheckboxQuestion = (props) => {
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
+  const anyChecked = Object.values(state).filter(each => each === true).length === 0
   return (
     <div>
-      <FormControl required component="fieldset">
+      <FormControl required={data.required} component="fieldset">
         <FormLabel component="legend">{data.question}</FormLabel>
         <FormGroup>
           {answers.map((each, key) => {
             return <FormControlLabel
               key={each}
-              control={<Checkbox checked={state[each]} onChange={handleChange} name={each} />}
+              control={<Checkbox required={anyChecked} checked={state[each]} onChange={handleChange} name={each} />}
               label={each}
             />
           })}

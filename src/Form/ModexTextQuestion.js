@@ -11,6 +11,7 @@ const ModexTextQuestion = (props) => {
       id={data.question}
       label={data.question}
       value={value}
+      required={data.required}
       onChange={(e) => { setValue(e.target.value) }}
     />
   </div>)
